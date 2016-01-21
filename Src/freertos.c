@@ -37,7 +37,8 @@
 #include "cmsis_os.h"
 
 /* USER CODE BEGIN Includes */     
-
+#include "gpio.h"
+#include "hd44780.h"
 /* USER CODE END Includes */
 
 /* Variables -----------------------------------------------------------------*/
@@ -96,10 +97,22 @@ void StartDefaultTask(void const * argument)
 {
 
   /* USER CODE BEGIN StartDefaultTask */
+  uint32_t i=0;
+  char dispbuf[33];
+  HD44780_Init();
+  osDelay(500);
+  HD44780_print("RTOS started...", 16);
+  osDelay(500);
+  osDelay(500);
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    sprintf(dispbuf, "Heepy %lu.", i++);
+    HD44780_print(dispbuf, 16);
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET);
+    osDelay(100);
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET);
+    osDelay(400);
   }
   /* USER CODE END StartDefaultTask */
 }

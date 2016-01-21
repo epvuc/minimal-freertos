@@ -52,7 +52,8 @@ C_SOURCES = \
   Src/gpio.c \
   Src/main.c \
   Src/stm32f4xx_hal_msp.c \
-  Src/stm32f4xx_it.c  
+  Src/stm32f4xx_it.c  \
+  Src/hd44780.c
 ASM_SOURCES = \
   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f407xx.s
 
